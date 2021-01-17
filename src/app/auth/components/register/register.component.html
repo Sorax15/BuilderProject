@@ -1,0 +1,27 @@
+<form [formGroup]="form" (ngSubmit)="submit()">
+
+  <mat-form-field>
+    <mat-label>Name:</mat-label>
+    <input matNativeControl type="email" matInput formControlName="name" placeholder="Enter you name" required>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Email:</mat-label>
+    <input matNativeControl type="email" matInput formControlName="email" placeholder="Enter you email" required>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Password:</mat-label>
+    <input matNativeControl type="email" matInput formControlName="name" placeholder="Enter you password" required>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Type:</mat-label>
+    <select matNativeControl required formControlName="type">
+      <option value="builder">Builder</option>
+      <option value="client">Client</option>
+    </select>
+  </mat-form-field>
+
+  <button mat-button color="primary" [disabled]="isSubmitting$ | async">Sing Up</button>
+</form>
