@@ -4,11 +4,14 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AuthModule } from './auth/auth.module';
 import { environment } from '../environments/environment';
+import { PersistenceService } from './services/persistence.service';
+import { AuthInterceptors } from './auth/interceptors/auth.interceptors';
 
 @NgModule({
   declarations: [
@@ -26,7 +29,14 @@ import { environment } from '../environments/environment';
       logOnly: environment.production
     }),
   ],
-  providers: [],
+  providers: [
+    PersistenceService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptors,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

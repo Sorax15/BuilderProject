@@ -1,9 +1,9 @@
 import { Action, createReducer, on } from '@ngrx/store';
 
-import { IAuthStateInterface } from '../../types/authState.interface';
+import { IRegisterStateInterface } from '../../types/registerState.interface';
 import { registerAction, registerFailureAction, registerSuccessAction } from '../actions/register.action';
 
-export const initialState: IAuthStateInterface = {
+export const initialState: IRegisterStateInterface = {
   isSubmitting: false,
   user: null,
   error: null
@@ -11,22 +11,24 @@ export const initialState: IAuthStateInterface = {
 
 const register = createReducer(
   initialState,
-  on(registerAction, (state: IAuthStateInterface) => ({
+  on(registerAction, (state: IRegisterStateInterface) => ({
     ...state,
-    isSubmitting: true
+    isSubmitting: true,
   })),
-  on(registerSuccessAction, (state: IAuthStateInterface, { authResponse }) => ({
+  on(registerSuccessAction, (state: IRegisterStateInterface, { authResponse }) => ({
     ...state,
     isSubmitting: false,
-    user: authResponse
+    user: authResponse,
+    error: null
   })),
-  on(registerFailureAction, (state: IAuthStateInterface, { authError }) => ({
+  on(registerFailureAction, (state: IRegisterStateInterface, { authError }) => ({
     ...state,
     isSubmitting: false,
-    error: authError
+    error: authError,
+    user: null
   }))
 );
 
-export function registerReducer(state: IAuthStateInterface, action: Action): any {
+export function registerReducer(state: IRegisterStateInterface, action: Action): any {
   return register(state, action);
 }

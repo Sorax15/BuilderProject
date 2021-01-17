@@ -1,1 +1,15 @@
-<p>login works!</p>
+<form [formGroup]="form" (ngSubmit)="submit()">
+
+  <mat-form-field>
+    <mat-label>Email:</mat-label>
+    <input matNativeControl type="email" matInput formControlName="email" placeholder="Enter you email" required>
+  </mat-form-field><br/>
+
+  <mat-form-field>
+    <mat-label>Password:</mat-label>
+    <input matNativeControl type="password" matInput formControlName="password" placeholder="Enter you password" required>
+  </mat-form-field><br/>
+
+
+  <button mat-button color="primary" [disabled]="form.invalid">Sing Up</button>
+</form>

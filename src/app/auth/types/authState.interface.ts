@@ -1,8 +1,9 @@
-import { IAuthErrorInterface } from './authError.interface';
-import { IAuthResponseInterface } from './authResponse.interface';
+import { ILoginRequestInterface } from './loginRequest.interface';
+import { IRegisterStateInterface } from './registerState.interface';
+import { ICurrentStateInterface } from './currentState.interface';
 
 export interface IAuthStateInterface {
-  isSubmitting: boolean;
-  user: IAuthResponseInterface | null;
-  error: IAuthErrorInterface | null;
+  loginReducer: ILoginRequestInterface;
+  registerReducer: IRegisterStateInterface;
+  currentReducer: ICurrentStateInterface;
 }

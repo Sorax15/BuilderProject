@@ -7,15 +7,22 @@ import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
+import { HttpClientModule } from '@angular/common/http';
 
 import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
 import { RecoveryComponent } from './components/recovery/recovery.component';
 import { ConfirmComponent } from './components/confirm/confirm.component';
+import { RegisterEffect } from './store/effects/register.effect';
+import { LoginEffects } from './store/effects/login.effects';
+import { CurrentEffect } from './store/effects/current.effect';
+import { LoginService } from './services/login.service';
+import { RegisterService } from './services/register.service';
+import { PersistenceService } from '../services/persistence.service';
+import { CurrentUserService } from './services/currentUser.service';
+import { loginReducer} from './store/reducers/login.reducer';
 import { registerReducer } from './store/reducers/register.reducer';
-import {RegisterEffect} from './store/effects/register.effect';
-import {RegisterService} from './services/register.service';
-import {HttpClientModule} from '@angular/common/http';
+import { currentReducer } from './store/reducers/current.reducer';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -38,10 +45,10 @@ const routes: Routes = [
     MatFormFieldModule,
     MatInputModule,
     MatButtonModule,
-    EffectsModule.forFeature([RegisterEffect]),
-    StoreModule.forFeature('auth', registerReducer),
+    EffectsModule.forFeature([LoginEffects, RegisterEffect, CurrentEffect]),
+    StoreModule.forFeature('auth', { registerReducer, loginReducer, currentReducer }),
     HttpClientModule
   ],
-  providers: [RegisterService]
+  providers: [RegisterService, PersistenceService, LoginService, CurrentUserService]
 })
 export class AuthModule { }

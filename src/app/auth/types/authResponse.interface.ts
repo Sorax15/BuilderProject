@@ -1,6 +1,7 @@
 export interface IAuthResponseInterface {
-  _id: string;
+  id: string;
   name: string;
   email: string;
+  type: string;
   token: string;
 }

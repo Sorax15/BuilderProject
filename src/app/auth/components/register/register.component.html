@@ -2,18 +2,18 @@
 
   <mat-form-field>
     <mat-label>Name:</mat-label>
-    <input matNativeControl type="email" matInput formControlName="name" placeholder="Enter you name" required>
-  </mat-form-field>
+    <input matNativeControl type="text" matInput formControlName="name" placeholder="Enter you name" required>
+  </mat-form-field><br/>
 
   <mat-form-field>
     <mat-label>Email:</mat-label>
     <input matNativeControl type="email" matInput formControlName="email" placeholder="Enter you email" required>
-  </mat-form-field>
+  </mat-form-field><br/>
 
   <mat-form-field>
     <mat-label>Password:</mat-label>
-    <input matNativeControl type="email" matInput formControlName="name" placeholder="Enter you password" required>
-  </mat-form-field>
+    <input matNativeControl type="password" matInput formControlName="password" placeholder="Enter you password" required>
+  </mat-form-field><br/>
 
   <mat-form-field>
     <mat-label>Type:</mat-label>
@@ -21,7 +21,8 @@
       <option value="builder">Builder</option>
       <option value="client">Client</option>
     </select>
-  </mat-form-field>
+  </mat-form-field><br/>
 
-  <button mat-button color="primary" [disabled]="isSubmitting$ | async">Sing Up</button>
+  <div>{{ isSubmitting$ | async }}</div>
+  <button mat-button color="primary" [disabled]="(isSubmitting$ | async) && form.invalid">Sing Up</button>
 </form>
