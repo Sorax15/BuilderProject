@@ -20,15 +20,35 @@ import { LoginService } from './services/login.service';
 import { RegisterService } from './services/register.service';
 import { PersistenceService } from '../services/persistence.service';
 import { CurrentUserService } from './services/currentUser.service';
-import { loginReducer} from './store/reducers/login.reducer';
-import { registerReducer } from './store/reducers/register.reducer';
-import { currentReducer } from './store/reducers/current.reducer';
+import { authReducer } from './store/reducers/auth.reducer';
+import { AuthGuard } from './guards/auth.guard';
+
 
 const routes: Routes = [
-  { path: 'login', component: LoginComponent },
-  { path: 'register', component: RegisterComponent },
-  { path: 'recovery', component: RecoveryComponent },
-  { path: 'confirm', component: ConfirmComponent }
+  /**
+   * Login page
+   */
+  {
+    path: 'login', component: LoginComponent, canActivate: [AuthGuard]
+  },
+  /**
+   * Register page
+   */
+  {
+    path: 'register', component: RegisterComponent, canActivate: [AuthGuard]
+  },
+  /**
+   * Recovery page
+   */
+  {
+    path: 'recovery', component: RecoveryComponent, canActivate: [AuthGuard]
+  },
+  /**
+   * Confirm page
+   */
+  {
+    path: 'confirm', component: ConfirmComponent, canActivate: [AuthGuard]
+  }
 ];
 
 @NgModule({
@@ -46,9 +66,15 @@ const routes: Routes = [
     MatInputModule,
     MatButtonModule,
     EffectsModule.forFeature([LoginEffects, RegisterEffect, CurrentEffect]),
-    StoreModule.forFeature('auth', { registerReducer, loginReducer, currentReducer }),
+    StoreModule.forFeature('auth', authReducer),
     HttpClientModule
   ],
-  providers: [RegisterService, PersistenceService, LoginService, CurrentUserService]
+  providers: [
+    RegisterService,
+    PersistenceService,
+    LoginService,
+    CurrentUserService,
+    AuthGuard
+  ]
 })
 export class AuthModule { }

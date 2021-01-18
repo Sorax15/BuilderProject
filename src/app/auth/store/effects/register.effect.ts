@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import {catchError, map, switchMap, tap} from 'rxjs/operators';
+import { catchError, map, switchMap, tap } from 'rxjs/operators';
 import { HttpErrorResponse } from '@angular/common/http';
-import {Router} from '@angular/router';
 import { of } from 'rxjs';
 
 import { RegisterService } from '../../services/register.service';
@@ -12,6 +12,7 @@ import { PersistenceService } from '../../../services/persistence.service';
 
 
 @Injectable()
+
 export class RegisterEffect {
 
   register$ = createEffect(() => this.actions$.pipe(
@@ -35,7 +36,7 @@ export class RegisterEffect {
     tap(() => {
       this.router.navigateByUrl('/');
     })
-  ), {dispatch : false});
+  ), { dispatch : false });
 
   constructor(
     private actions$: Actions,
