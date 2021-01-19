@@ -15,4 +15,12 @@ export class PersistenceService {
       return null;
     }
   }
+
+  removeToken(key: string): void {
+    try {
+      localStorage.removeItem(key);
+    } catch (e) {
+      console.error('Error remove value from local storage', e);
+    }
+  }
 }

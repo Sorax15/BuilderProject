@@ -23,7 +23,6 @@ import { CurrentUserService } from './services/currentUser.service';
 import { authReducer } from './store/reducers/auth.reducer';
 import { AuthGuard } from './guards/auth.guard';
 
-
 const routes: Routes = [
   /**
    * Login page
@@ -74,7 +73,7 @@ const routes: Routes = [
     PersistenceService,
     LoginService,
     CurrentUserService,
-    AuthGuard
+    AuthGuard,
   ]
 })
 export class AuthModule { }

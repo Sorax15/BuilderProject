@@ -3,6 +3,7 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { Store} from '@ngrx/store';
 
 import { loginAction } from '../../store/actions/login.action';
+import {ActivatedRoute} from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -14,7 +15,9 @@ export class LoginComponent implements OnInit {
 
   form!: FormGroup;
 
-  constructor(private fb: FormBuilder, private store: Store) { }
+  constructor(private fb: FormBuilder, private store: Store) {
+
+  }
 
   ngOnInit(): void {
     this.initializeForm();

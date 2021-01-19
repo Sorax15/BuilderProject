@@ -15,12 +15,6 @@ export class CurrentEffect {
   currentUser$ = createEffect(() => this.actions.pipe(
     ofType(currentAction),
     switchMap(() => {
-
-      const token = this.persistenceService.getToken('token');
-      if (token) {
-        return of(currentFailureAction());
-      }
-
       return this.currentService.currentUser().pipe(
         map((currentUser: IAuthResponseInterface) => {
           return currentSuccessAction({ authResponse: currentUser });
@@ -32,9 +26,7 @@ export class CurrentEffect {
     })
   ));
 
-  constructor(
-    private actions: Actions,
-    private currentService: CurrentUserService,
-    private persistenceService: PersistenceService)
-  {}
+  constructor(private actions: Actions, private currentService: CurrentUserService) {
+
+  }
 }

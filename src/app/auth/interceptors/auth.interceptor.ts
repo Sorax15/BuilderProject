@@ -10,7 +10,8 @@ import { PersistenceService } from '../../services/persistence.service';
 
 export class AuthInterceptors implements HttpInterceptor {
 
-  constructor(private persistenceService: PersistenceService, private router: Router ) {
+  constructor(private persistenceService: PersistenceService, private router: Router) {
+
   }
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
@@ -19,11 +20,10 @@ export class AuthInterceptors implements HttpInterceptor {
     if (token) {
       req = req.clone({
         setHeaders: {
-          Authorization: token ? `Token ${token}` : ''
+          Authorization: `${token}`
         }
       });
     }
-
 
     return next.handle(req).pipe(
       catchError(
@@ -35,6 +35,7 @@ export class AuthInterceptors implements HttpInterceptor {
   private handleAuthError(error: HttpErrorResponse): Observable<HttpEvent<any>> {
 
     if (error.status === 404 || error.status === 401) {
+      this.persistenceService.removeToken('token');
       this.router.navigateByUrl('/login');
     }
 
