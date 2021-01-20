@@ -9,9 +9,10 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AuthModule } from './auth/auth.module';
+import { HomeModule } from './home/home.module';
 import { environment } from '../environments/environment';
 import { PersistenceService } from './services/persistence.service';
-import { AuthInterceptors } from './auth/interceptors/auth.interceptors';
+import { AuthInterceptor } from './auth/interceptors/auth.interceptor';
 
 @NgModule({
   declarations: [
@@ -20,6 +21,7 @@ import { AuthInterceptors } from './auth/interceptors/auth.interceptors';
   imports: [
     BrowserModule,
     AuthModule,
+    HomeModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     StoreModule.forRoot({}),
@@ -33,7 +35,7 @@ import { AuthInterceptors } from './auth/interceptors/auth.interceptors';
     PersistenceService,
     {
       provide: HTTP_INTERCEPTORS,
-      useClass: AuthInterceptors,
+      useClass: AuthInterceptor,
       multi: true
     }
   ],

@@ -8,7 +8,7 @@ import { PersistenceService } from '../../services/persistence.service';
 
 @Injectable()
 
-export class AuthInterceptors implements HttpInterceptor {
+export class AuthInterceptor implements HttpInterceptor {
 
   constructor(private persistenceService: PersistenceService, private router: Router) {
 

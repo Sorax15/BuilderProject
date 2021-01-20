@@ -3,7 +3,7 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { Store} from '@ngrx/store';
 
 import { loginAction } from '../../store/actions/login.action';
-import {ActivatedRoute} from '@angular/router';
+import { IAppStateInterface } from '../../../types/appState.interface';
 
 @Component({
   selector: 'app-login',
@@ -15,7 +15,7 @@ export class LoginComponent implements OnInit {
 
   form!: FormGroup;
 
-  constructor(private fb: FormBuilder, private store: Store) {
+  constructor(private fb: FormBuilder, private store: Store<IAppStateInterface>) {
 
   }
 
