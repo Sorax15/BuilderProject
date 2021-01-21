@@ -7,6 +7,7 @@ import { HomeComponent } from './components/home/home.component';
 import { CurrentUserService } from '../auth/services/currentUser.service';
 import { HomeGuard } from './guards/home.guard';
 import { homeReducer } from './store/reducers/home.reducer';
+import {HttpClientModule} from '@angular/common/http';
 
 const routers: Routes = [
   /**
@@ -23,6 +24,7 @@ const routers: Routes = [
   ],
   imports: [
     CommonModule,
+    HttpClientModule,
     RouterModule.forChild(routers),
     StoreModule.forFeature('home', homeReducer)
   ],

@@ -1,7 +1,7 @@
 import { Action, createReducer, on } from '@ngrx/store';
 
-import { postAction, postFailureAction, postSuccessAction } from '../actions/post.action';
 import { IHomeStateInterface } from '../../types/homeState.interface';
+import { fetchPostsAction, fetchPostsFailureAction, fetchPostsSuccessAction } from '../actions/post.action';
 
 export const initialState: IHomeStateInterface = {
   posts: null,
@@ -10,16 +10,16 @@ export const initialState: IHomeStateInterface = {
 
 const home = createReducer(
   initialState,
-  on(postAction, (state: IHomeStateInterface) => ({
+  on(fetchPostsAction, (state: IHomeStateInterface) => ({
     ...state,
     isSubmitting: true
   })),
-  on(postSuccessAction, (state: IHomeStateInterface, { resultPosts }) => ({
+  on(fetchPostsSuccessAction, (state: IHomeStateInterface, { resultPosts }) => ({
     ...state,
     isSubmitting: false,
     posts: resultPosts
   })),
-  on(postFailureAction, (state: IHomeStateInterface) => ({
+  on(fetchPostsFailureAction, (state: IHomeStateInterface) => ({
     ...state,
     isSubmitting: false,
   }))
